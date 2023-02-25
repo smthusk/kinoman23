@@ -1,16 +1,18 @@
-import { render } from './render';
+import { render, RenderPosition } from './render';
 import UserRankView from './view/user-rank-view.js';
 import FilterView from './view/filter-view.js';
 import FooterStatisticsView from './view/footer-statistics-view.js';
+import FilmPopupView from './view/film-popup-view.js';
 import FilmsPresenter from './presenter/films-presenter.js';
 
-const siteHeaderElement = document.querySelector('.header');
-const siteFooterElement = document.querySelector('.footer');
-const siteMainElement = document.querySelector('.main');
+const headerElement = document.querySelector('.header');
+const footerElement = document.querySelector('.footer');
+const mainElement = document.querySelector('.main');
 const filmsPresenter = new FilmsPresenter();
 
-render(new UserRankView(), siteHeaderElement);
-render(new FilterView(), siteMainElement);
-render(new FooterStatisticsView(), siteFooterElement);
+render(new UserRankView(), headerElement);
+render(new FilterView(), mainElement);
+render(new FooterStatisticsView(), footerElement);
+render(new FilmPopupView(), footerElement, RenderPosition.AFTEREND);
 
-filmsPresenter.init(siteMainElement);
+filmsPresenter.init(mainElement);
