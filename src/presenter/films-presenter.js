@@ -18,24 +18,23 @@ export default class FilmsPresenter {
   filmsListCommentedComponent = new FilmsListCommentedView();
 
   renderFilms() {
-    const siteFilmsContainerElement = this.filmsListComponent
+    const filmsContainerElement = this.filmsListComponent
       .getElement()
       .querySelector('.films-list__container');
 
     for (let i = 0; i < FILMS_COUNT; i++) {
-      render(new FilmCardView(), siteFilmsContainerElement);
+      render(new FilmCardView(), filmsContainerElement);
     }
 
     render(new ShowMoreBtnView(), this.filmsListComponent.getElement());
-
     render(this.filmsListRatedComponent, this.filmsBoardComponent.getElement());
 
-    const siteFilmsRatedContainerElement = this.filmsListRatedComponent
+    const filmsRatedContainerElement = this.filmsListRatedComponent
       .getElement()
       .querySelector('.films-list__container');
 
     for (let i = 0; i < FILMS_RATED_COUNT; i++) {
-      render(new FilmCardView(), siteFilmsRatedContainerElement);
+      render(new FilmCardView(), filmsRatedContainerElement);
     }
 
     render(
@@ -43,12 +42,12 @@ export default class FilmsPresenter {
       this.filmsBoardComponent.getElement()
     );
 
-    const siteFilmsCommentedContainerElement = this.filmsListCommentedComponent
+    const filmsCommentedContainerElement = this.filmsListCommentedComponent
       .getElement()
       .querySelector('.films-list__container');
 
     for (let i = 0; i < FILMS_COMMENTED_COUNT; i++) {
-      render(new FilmCardView(), siteFilmsCommentedContainerElement);
+      render(new FilmCardView(), filmsCommentedContainerElement);
     }
   }
 
@@ -56,7 +55,6 @@ export default class FilmsPresenter {
     this.mainContainer = filmsContainer;
 
     render(new SortView(), this.mainContainer);
-
     render(this.filmsBoardComponent, this.mainContainer);
     render(this.filmsListComponent, this.filmsBoardComponent.getElement());
     this.renderFilms();
