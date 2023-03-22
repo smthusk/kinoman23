@@ -7,7 +7,6 @@ import FilmsListCommentedView from '../view/films-list-commented-view.js';
 import FilmCardView from '../view/film-card-view.js';
 import ShowMoreBtnView from '../view/show-more-btn-view.js';
 
-const FILMS_COUNT = 5;
 const FILMS_COMMENTED_COUNT = 2;
 const FILMS_RATED_COUNT = 2;
 
@@ -17,13 +16,13 @@ export default class FilmsPresenter {
   filmsListRatedComponent = new FilmsListRatedView();
   filmsListCommentedComponent = new FilmsListCommentedView();
 
-  renderFilms() {
+  renderFilms(listFilms) {
     const filmsContainerElement = this.filmsListComponent
       .getElement()
       .querySelector('.films-list__container');
 
-    for (let i = 0; i < FILMS_COUNT; i++) {
-      render(new FilmCardView(), filmsContainerElement);
+    for (let i = 0; i < listFilms.length; i++) {
+      render(new FilmCardView(listFilms[i]), filmsContainerElement);
     }
 
     render(new ShowMoreBtnView(), this.filmsListComponent.getElement());
@@ -51,12 +50,15 @@ export default class FilmsPresenter {
     }
   }
 
-  init = (filmsContainer) => {
+  init = (filmsContainer, filmsModel) => {
     this.mainContainer = filmsContainer;
+    this.filmsModel = filmsModel;
+    this.listFilms = [...this.filmsModel.getFilms()];
 
     render(new SortView(), this.mainContainer);
     render(this.filmsBoardComponent, this.mainContainer);
     render(this.filmsListComponent, this.filmsBoardComponent.getElement());
-    this.renderFilms();
+
+    this.renderFilms(this.listFilms);
   };
 }
