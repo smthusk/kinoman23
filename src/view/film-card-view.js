@@ -1,6 +1,18 @@
 import { createElement } from '../render.js';
 import { humanizeFilmReleaseDate, humanizeFilmDuration } from '../utils.js';
 
+function getControls(controlsData) {
+  const inWatchlist = controlsData.watchlist ? 'film-card__controls-item--active' : '';
+  const isWatched = controlsData.alreadyWatched ? 'film-card__controls-item--active' : '';
+  const isFavorite = controlsData.favorite ? 'film-card__controls-item--active' : '';
+
+  return `<div class="film-card__controls">
+    <button class="film-card__controls-item film-card__controls-item--add-to-watchlist ${inWatchlist}" type="button">Add to watchlist</button>
+    <button class="film-card__controls-item film-card__controls-item--mark-as-watched ${isWatched}" type="button">Mark as watched</button>
+    <button class="film-card__controls-item film-card__controls-item--favorite ${isFavorite}" type="button">Mark as favorite</button>
+  </div>`;
+}
+
 const createFilmCardTemplate = (film) => {
   const { filmInfo, comments, userDetails } = film;
   const releaseDate = humanizeFilmReleaseDate(filmInfo.release.date);
@@ -8,20 +20,6 @@ const createFilmCardTemplate = (film) => {
   const genre = filmInfo.genre.join(', ');
   const description = filmInfo.description.substring(0, 139).concat('...');
   const controls = getControls(userDetails);
-
-  function getControls(controlsData) {
-    const inWatchlist = controlsData.watchlist ? 'film-card__controls-item--active' : '';
-    const isWatched = controlsData.alreadyWatched ? 'film-card__controls-item--active' : '';
-    const isFavorite = controlsData.favorite ? 'film-card__controls-item--active' : '';
-
-    return `<div class="film-card__controls">
-      <button class="film-card__controls-item film-card__controls-item--add-to-watchlist ${inWatchlist}" type="button">Add to watchlist</button>
-      <button class="film-card__controls-item film-card__controls-item--mark-as-watched ${isWatched}" type="button">Mark as watched</button>
-      <button class="film-card__controls-item film-card__controls-item--favorite ${isFavorite}" type="button">Mark as favorite</button>
-    </div>`;
-  }
-
-  
 
   return `<article class="film-card">
   <a class="film-card__link">

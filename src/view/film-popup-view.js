@@ -1,4 +1,5 @@
 import { createElement } from '../render.js';
+import { humanizeFilmReleaseDate, humanizeFilmDuration } from '../utils.js';
 
 const createFilmPopupTemplate = () => `<section class="film-details">
 <form class="film-details__inner" action="" method="get">
