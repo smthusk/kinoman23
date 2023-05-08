@@ -1,8 +1,7 @@
-
-let id = 0;
+import { nanoid } from 'nanoid';
 
 export const generateFilm = () => ({
-  id: id++,
+  id: nanoid(),
   comments: ['1', '2'],
   filmInfo: {
     title: 'A Little Pony Without The Carpet',

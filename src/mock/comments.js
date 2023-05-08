@@ -1,4 +1,5 @@
 import {getRandomInteger} from '../utils.js';
+import { nanoid } from 'nanoid';
 
 const generateAuthor = () => {
   const authors = [
@@ -34,10 +35,8 @@ const generateEmoji = () => {
   return emoji[randomIndex];
 };
 
-let id = 0;
-
 export const generateComment = () => ({
-  id: id++,
+  id: nanoid(),
   author: generateAuthor(),
   comment: generateCommentText(),
   date: '2019-05-11T16:12:32.554Z',

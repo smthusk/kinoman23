@@ -1,13 +1,15 @@
 import { createElement } from '../render.js';
 import { humanizeFilmReleaseDate, humanizeFilmDuration } from '../utils.js';
 
-function getControls(controlsData) {
-  const inWatchlist = controlsData.watchlist ? 'film-card__controls-item--active' : '';
-  const isWatched = controlsData.alreadyWatched ? 'film-card__controls-item--active' : '';
-  const isFavorite = controlsData.favorite ? 'film-card__controls-item--active' : '';
+const FILM_DESCRIPTION_MAX_LENGTH = 139;
+
+function getControls(userDetails) {
+  const isInWatchlist = userDetails.watchlist ? 'film-card__controls-item--active' : '';
+  const isWatched = userDetails.alreadyWatched ? 'film-card__controls-item--active' : '';
+  const isFavorite = userDetails.favorite ? 'film-card__controls-item--active' : '';
 
   return `<div class="film-card__controls">
-    <button class="film-card__controls-item film-card__controls-item--add-to-watchlist ${inWatchlist}" type="button">Add to watchlist</button>
+    <button class="film-card__controls-item film-card__controls-item--add-to-watchlist ${isInWatchlist}" type="button">Add to watchlist</button>
     <button class="film-card__controls-item film-card__controls-item--mark-as-watched ${isWatched}" type="button">Mark as watched</button>
     <button class="film-card__controls-item film-card__controls-item--favorite ${isFavorite}" type="button">Mark as favorite</button>
   </div>`;
@@ -18,8 +20,7 @@ const createFilmCardTemplate = (film) => {
   const releaseDate = humanizeFilmReleaseDate(filmInfo.release.date);
   const duration = humanizeFilmDuration(filmInfo.duration);
   const genre = filmInfo.genre.join(', ');
-  const description = filmInfo.description.substring(0, 139).concat('...');
-  const controls = getControls(userDetails);
+  const description = filmInfo.description.substring(0, FILM_DESCRIPTION_MAX_LENGTH).concat('...');
 
   return `<article class="film-card">
   <a class="film-card__link">
@@ -34,7 +35,7 @@ const createFilmCardTemplate = (film) => {
     <p class="film-card__description">${description}</p>
     <span class="film-card__comments">${comments.length} comments</span>
   </a>
-  ${controls}
+  ${getControls(userDetails)}
   </article>`;
 };
 

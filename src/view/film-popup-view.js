@@ -1,26 +1,26 @@
 import { createElement } from '../render.js';
 import { humanizeFilmReleaseDatePopup, humanizeFilmDuration, humanizeDateComment } from '../utils.js';
 
-function getControls(controlsData) {
-  const inWatchlist = controlsData.watchlist ? 'film-details__control-button--active' : '';
-  const isWatched = controlsData.alreadyWatched ? 'film-details__control-button--active' : '';
-  const isFavorite = controlsData.favorite ? 'film-details__control-button--active' : '';
+function getControls(userDetails) {
+  const isInWatchlist = userDetails.watchlist ? 'film-details__control-button--active' : '';
+  const isWatched = userDetails.alreadyWatched ? 'film-details__control-button--active' : '';
+  const isFavorite = userDetails.favorite ? 'film-details__control-button--active' : '';
 
   return `<section class="film-details__controls">
-      <button type="button" class="film-details__control-button film-details__control-button--watchlist ${inWatchlist}" id="watchlist" name="watchlist">Add to watchlist</button>
+      <button type="button" class="film-details__control-button film-details__control-button--watchlist ${isInWatchlist}" id="watchlist" name="watchlist">Add to watchlist</button>
       <button type="button" class="film-details__control-button film-details__control-button--watched ${isWatched}" id="watched" name="watched">Already watched</button>
       <button type="button" class="film-details__control-button film-details__control-button--favorite ${isFavorite}" id="favorite" name="favorite">Add to favorites</button>
     </section>`;
 }
 
-function getGenres(genresData) {
-  const genresList = genresData.map((genre) => `<span class="film-details__genre">${genre}</span>`);
+function getGenres(genres) {
+  const genresList = genres.map((genre) => `<span class="film-details__genre">${genre}</span>`);
 
   return genresList.join('');
 }
 
-function getComments(commentsData) {
-  const commentsList = commentsData.map((comment) => `<li class="film-details__comment">
+function getComments(comments) {
+  const commentsList = comments.map((comment) => `<li class="film-details__comment">
       <span class="film-details__comment-emoji">
         <img src="./images/emoji/${comment.emotion}.png" width="55" height="55" alt="emoji-${comment.emotion}">
       </span>
