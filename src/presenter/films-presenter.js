@@ -32,9 +32,9 @@ export default class FilmsPresenter {
       .getElement()
       .querySelector('.films-list__container');
 
-    for (let i = 0; i < FILMS_RATED_COUNT; i++) {
-      render(new FilmCardView(), filmsRatedContainerElement);
-    }
+    // for (let i = 0; i < FILMS_RATED_COUNT; i++) {
+    //   render(new FilmCardView(), filmsRatedContainerElement);
+    // }
 
     render(
       this.filmsListCommentedComponent,
@@ -45,9 +45,9 @@ export default class FilmsPresenter {
       .getElement()
       .querySelector('.films-list__container');
 
-    for (let i = 0; i < FILMS_COMMENTED_COUNT; i++) {
-      render(new FilmCardView(), filmsCommentedContainerElement);
-    }
+    // for (let i = 0; i < FILMS_COMMENTED_COUNT; i++) {
+    //   render(new FilmCardView(), filmsCommentedContainerElement);
+    // }
   }
 
   init = (filmsContainer, filmsModel) => {
