@@ -46,7 +46,8 @@ const createFilmPopupTemplate = (film, commentsList) => {
   const duration = humanizeFilmDuration(filmInfo.duration);
   const genres = getGenres(filmInfo.genre);
   const controls = getControls(userDetails);
-  const commentItems = getComments(commentsList);
+  const commentsItems = commentsList.filter((item) => comments.includes(item.id));
+  const commentItems = getComments(commentsItems);
 
   return `<section class="film-details">
 <form class="film-details__inner" action="" method="get">
