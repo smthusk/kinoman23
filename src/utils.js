@@ -9,13 +9,17 @@ const getRandomInteger = (a = 0, b = 1) => {
 };
 
 const shuffleArray = (arr) => {
-  const shuffledArray = arr.slice();
-  for (let i = 0; i < shuffledArray.length; i++) {
-    const randomIndex = getRandomInteger(1, shuffledArray.length - 1);
-    const curr = shuffledArray[i];
-    shuffledArray[i] = shuffledArray[randomIndex];
-    shuffledArray[randomIndex] = curr;
-  }
+  const shuffledArray = [];
+  const indexList = [];
+
+  arr.forEach(() => {
+    const randomIndex = getRandomInteger(1, arr.length - 1);
+    if (!indexList.includes(randomIndex)) {
+      indexList.push(randomIndex);
+      shuffledArray.push(arr[randomIndex]);
+    }
+  });
+
   return shuffledArray;
 };
 
