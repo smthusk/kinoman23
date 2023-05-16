@@ -17,19 +17,17 @@ export default class FilmsPresenter {
   filmsListCommentedComponent = new FilmsListCommentedView();
 
   renderFilms(filmsList) {
-    const filmsContainerElement = this.filmsListComponent
-      .getElement()
-      .querySelector('.films-list__container');
+    const filmsContainerElement = this.filmsListComponent.element.querySelector('.films-list__container');
 
     for (const film of filmsList) {
       render(new FilmCardView(film), filmsContainerElement);
     }
 
-    render(new ShowMoreBtnView(), this.filmsListComponent.getElement());
-    render(this.filmsListRatedComponent, this.filmsBoardComponent.getElement());
+    render(new ShowMoreBtnView(), this.filmsListComponent.element);
+    render(this.filmsListRatedComponent, this.filmsBoardComponent.element);
 
     // const filmsRatedContainerElement = this.filmsListRatedComponent
-    //   .getElement()
+    //   .element
     //   .querySelector('.films-list__container');
 
     // for (let i = 0; i < FILMS_RATED_COUNT; i++) {
@@ -38,11 +36,11 @@ export default class FilmsPresenter {
 
     // render(
     //   this.filmsListCommentedComponent,
-    //   this.filmsBoardComponent.getElement()
+    //   this.filmsBoardComponent.element
     // );
 
     // const filmsCommentedContainerElement = this.filmsListCommentedComponent
-    //   .getElement()
+    //   .element
     //   .querySelector('.films-list__container');
 
     // for (let i = 0; i < FILMS_COMMENTED_COUNT; i++) {
@@ -53,11 +51,11 @@ export default class FilmsPresenter {
   init = (filmsContainer, filmsModel) => {
     this.mainContainer = filmsContainer;
     this.filmsModel = filmsModel;
-    this.listFilms = [...this.filmsModel.getFilms()];
+    this.listFilms = [...this.filmsModel.films];
 
     render(new SortView(), this.mainContainer);
     render(this.filmsBoardComponent, this.mainContainer);
-    render(this.filmsListComponent, this.filmsBoardComponent.getElement());
+    render(this.filmsListComponent, this.filmsBoardComponent.element);
 
     this.renderFilms(this.listFilms);
   };

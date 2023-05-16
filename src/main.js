@@ -17,6 +17,6 @@ const commentsModel = new CommentsModel();
 render(new UserRankView(), headerElement);
 render(new FilterView(), mainElement);
 render(new FooterStatisticsView(), footerElement);
-render(new FilmPopupView(filmsModel.getFilms()[0], commentsModel.getComments()), footerElement, RenderPosition.AFTEREND);
+render(new FilmPopupView(filmsModel.films[0], commentsModel.comments), footerElement, RenderPosition.AFTEREND);
 
 filmsPresenter.init(mainElement, filmsModel);
