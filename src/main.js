@@ -9,12 +9,12 @@ import CommentsModel from './model/comments-model';
 const headerElement = document.querySelector('.header');
 const footerElement = document.querySelector('.footer');
 const mainElement = document.querySelector('.main');
-const filmsPresenter = new FilmsPresenter();
 const filmsModel = new FilmsModel();
 const commentsModel = new CommentsModel();
+const filmsPresenter = new FilmsPresenter(mainElement, filmsModel, commentsModel);
 
 render(new UserRankView(), headerElement);
 render(new FilterView(), mainElement);
 render(new FooterStatisticsView(), footerElement);
 
-filmsPresenter.init(mainElement, filmsModel, commentsModel);
+filmsPresenter.init();
