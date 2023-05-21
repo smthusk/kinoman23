@@ -6,7 +6,7 @@ import FilmsPresenter from './presenter/films-presenter.js';
 import FilmsModel from './model/films-model.js';
 import CommentsModel from './model/comments-model';
 
-const filterState = 'favorites';
+const filterState = 'all';
 const headerElement = document.querySelector('.header');
 const footerElement = document.querySelector('.footer');
 const mainElement = document.querySelector('.main');

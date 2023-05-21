@@ -16,9 +16,14 @@ const createFilterTemplate = (filterState) => {
 
 export default class FilterView {
   #element = null;
+  #filterState = 'all';
+
+  constructor(filterState) {
+    this.#filterState = filterState;
+  }
 
   get template() {
-    return createFilterTemplate();
+    return createFilterTemplate(this.#filterState);
   }
 
   get element() {
