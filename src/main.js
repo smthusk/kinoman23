@@ -6,15 +6,16 @@ import FilmsPresenter from './presenter/films-presenter.js';
 import FilmsModel from './model/films-model.js';
 import CommentsModel from './model/comments-model';
 
+const filterState = 'favorites';
 const headerElement = document.querySelector('.header');
 const footerElement = document.querySelector('.footer');
 const mainElement = document.querySelector('.main');
 const filmsModel = new FilmsModel();
 const commentsModel = new CommentsModel();
-const filmsPresenter = new FilmsPresenter(mainElement, filmsModel, commentsModel);
+const filmsPresenter = new FilmsPresenter(mainElement, footerElement, filterState, filmsModel, commentsModel);
 
 render(new UserRankView(), headerElement);
-render(new FilterView(), mainElement);
+render(new FilterView(filterState), mainElement);
 render(new FooterStatisticsView(), footerElement);
 
 filmsPresenter.init();

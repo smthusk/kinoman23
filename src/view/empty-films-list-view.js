@@ -7,7 +7,7 @@ const titles = {
   favorites: 'There are no favorite movies now'
 };
 
-const createEmptyFilmsListTemplate = (sortState = 'all') => {
+const createEmptyFilmsListTemplate = (sortState) => {
   const state = sortState.toLowerCase();
   return `<section class="films-list">
   <h2 class="films-list__title">${titles[state]}</h2>
@@ -16,9 +16,14 @@ const createEmptyFilmsListTemplate = (sortState = 'all') => {
 
 export default class EmptyFilmsListView {
   #element = null;
+  #sortState = 'all';
+
+  constructor(sortState) {
+    this.#sortState = sortState;
+  }
 
   get template() {
-    return createEmptyFilmsListTemplate();
+    return createEmptyFilmsListTemplate(this.#sortState);
   }
 
   get element() {
