@@ -168,4 +168,11 @@ export default class FilmPopupView extends AbstractView {
   get template() {
     return createFilmPopupTemplate(this.#film, this.#comments);
   }
+
+  setClickHandler(callback) {
+    this._callback.click = callback;
+    this.element.querySelector('.film-details__close-btn').addEventListener('click', this.#handleClick);
+  }
+
+  #handleClick = () => this._callback.click();
 }
