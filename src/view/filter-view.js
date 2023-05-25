@@ -1,4 +1,4 @@
-import { createElement } from '../render.js';
+import AbstractView from '../framework/view/abstract-view.js';
 
 const createFilterTemplate = (filterState) => {
   const allActive = filterState === 'all' ? 'main-navigation__item--active' : '';
@@ -14,27 +14,15 @@ const createFilterTemplate = (filterState) => {
 </nav>`;
 };
 
-export default class FilterView {
-  #element = null;
+export default class FilterView extends AbstractView {
   #filterState = 'all';
 
   constructor(filterState) {
+    super();
     this.#filterState = filterState;
   }
 
   get template() {
     return createFilterTemplate(this.#filterState);
-  }
-
-  get element() {
-    if (!this.#element) {
-      this.#element = createElement(this.template);
-    }
-
-    return this.#element;
-  }
-
-  removeElement() {
-    this.#element = null;
   }
 }
