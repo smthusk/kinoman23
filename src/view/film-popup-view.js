@@ -1,4 +1,4 @@
-import { createElement } from '../render.js';
+import AbstractView from '../framework/view/abstract-view.js';
 import { humanizeFilmReleaseDatePopup, humanizeFilmDuration, humanizeDateComment } from '../utils.js';
 
 function getControls(userDetails) {
@@ -155,12 +155,12 @@ const createFilmPopupTemplate = (film, commentsList) => {
 </section>`;
 };
 
-export default class FilmPopupView {
+export default class FilmPopupView extends AbstractView {
   #film = null;
   #comments = null;
-  #element = null;
 
   constructor(film, comments) {
+    super();
     this.#film = film;
     this.#comments = comments;
   }
@@ -169,15 +169,10 @@ export default class FilmPopupView {
     return createFilmPopupTemplate(this.#film, this.#comments);
   }
 
-  get element() {
-    if (!this.#element) {
-      this.#element = createElement(this.template);
-    }
-
-    return this.#element;
+  setClickHandler(callback) {
+    this._callback.click = callback;
+    this.element.querySelector('.film-details__close-btn').addEventListener('click', this.#handleClick);
   }
 
-  removeElement() {
-    this.#element = null;
-  }
+  #handleClick = () => this._callback.click();
 }

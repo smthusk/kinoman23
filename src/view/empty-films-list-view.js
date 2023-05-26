@@ -1,4 +1,4 @@
-import { createElement } from '../render.js';
+import AbstractView from '../framework/view/abstract-view.js';
 
 const titles = {
   all: 'There are no movies in our database',
@@ -14,27 +14,15 @@ const createEmptyFilmsListTemplate = (sortState) => {
   </section>`;
 };
 
-export default class EmptyFilmsListView {
-  #element = null;
+export default class EmptyFilmsListView extends AbstractView {
   #sortState = 'all';
 
   constructor(sortState) {
+    super();
     this.#sortState = sortState;
   }
 
   get template() {
     return createEmptyFilmsListTemplate(this.#sortState);
-  }
-
-  get element() {
-    if (!this.#element) {
-      this.#element = createElement(this.template);
-    }
-
-    return this.#element;
-  }
-
-  removeElement() {
-    this.#element = null;
   }
 }

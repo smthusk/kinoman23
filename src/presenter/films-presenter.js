@@ -39,8 +39,7 @@ export default class FilmsPresenter {
     this.#renderFilmsList();
   };
 
-  #handleShowMoreButtonClick = (evt) => {
-    evt.preventDefault();
+  #handleShowMoreButtonClick = () => {
     this.listFilms.slice(this.#rederedFilmsCount, this.#rederedFilmsCount + FILMS_COUNT_PER_STEP).forEach((film) => this.#renderFilm(film, this.listComments));
     this.#rederedFilmsCount += FILMS_COUNT_PER_STEP;
 
@@ -71,16 +70,13 @@ export default class FilmsPresenter {
 
     const openPopup = () => {
       this.popupComponent = new FilmPopupView(film, comments);
-      this.popupComponent.element.querySelector('.film-details__close-btn').addEventListener('click', closePopup);
+      this.popupComponent.setClickHandler(closePopup);
       document.addEventListener('keydown', onEscKeyDown);
       render(this.popupComponent, this.#footerElement, RenderPosition.AFTEREND);
       this.#bodyElement.classList.add('hide-overflow');
     };
 
-    this.filmComponent.element.querySelector('.film-card__link').addEventListener('click', (evt) => {
-      evt.preventDefault();
-      openPopup();
-    });
+    this.filmComponent.setClickHandler(openPopup);
 
     render(this.filmComponent, this.#filmsContainerElement);
   };
@@ -104,7 +100,7 @@ export default class FilmsPresenter {
 
     if (this.listFilms.length > FILMS_COUNT_PER_STEP) {
       render(this.#showMoreButtonComponent, this.#filmsListComponent.element);
-      this.#showMoreButtonComponent.element.addEventListener('click', this.#handleShowMoreButtonClick);
+      this.#showMoreButtonComponent.setClickHandler(this.#handleShowMoreButtonClick);
     }
   };
 
