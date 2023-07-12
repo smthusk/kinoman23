@@ -20,12 +20,10 @@ export default class FilmsPresenter {
   #showMoreButtonComponent = new ShowMoreBtnView();
   #rederedFilmsCount = FILMS_COUNT_PER_STEP;
   #bodyElement = document.body;
-  #filterState = null;
 
-  constructor(filmsContainer, footerElement, filterState, filmsModel, commentsModel) {
+  constructor(filmsContainer, footerElement, filmsModel, commentsModel) {
     this.#mainContainer = filmsContainer;
     this.#footerElement = footerElement;
-    this.#filterState = filterState;
     this.#filmsModel = filmsModel;
     this.#commentsModel = commentsModel;
     this.listFilms = [];
@@ -84,7 +82,7 @@ export default class FilmsPresenter {
   #renderFilmsList = () => {
     if (this.listFilms.length === 0) {
       render(this.#filmsBoardComponent, this.#mainContainer);
-      render(new EmptyFilmsListView(this.#filterState), this.#filmsBoardComponent.element);
+      render(new EmptyFilmsListView(), this.#filmsBoardComponent.element);
       return;
     }
 
