@@ -4,11 +4,12 @@ export default class FiltersModel {
 
   constructor(filmsModel) {
     this.#films = filmsModel.films;
+    this.currentFilter = 'all';
   }
 
   get filters() {
     this.#filters = {
-      filterState: 'all',
+      all: 'all',
       watchlist: this.#films.filter((film) => film.userDetails.watchlist).length,
       alreadyWatched: this.#films.filter((film) => film.userDetails.alreadyWatched).length,
       favorite: this.#films.filter((film) => film.userDetails.favorite).length
